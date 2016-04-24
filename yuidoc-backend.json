@@ -1,0 +1,11 @@
+{
+    "name": "Marriott/DCMLC",
+    "description": "Hotel guests connect to local music",
+    "version": "0.0.0",
+    "url": "https://github.com/xasopheno/Marriott/DCMLC",
+    "options": {
+        "paths": ".",
+        "outdir": "yuidocs/backend",
+        "exclude": "node_modules,public,src"
+    }
+}
