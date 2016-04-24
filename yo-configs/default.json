@@ -1,6 +1,6 @@
 {
 	"prompts":{
-		"optAppName": "Marriott/DCMLC",
+		"optAppName": "Marriott",
 		"optAppTitle": "Ren Project",
 		"optAppDescription": "Hotel guests connect to local music",
 		"optAppKeywords": [

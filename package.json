@@ -1,9 +1,9 @@
 {
 	"author": "Danny Meyer - Danny.Meyer@gmail.com",
-	"name": "Marriott/DCMLC",
+	"name": "Marriott",
 	"version": "0.0.0",
 	"description": "Hotel guests connect to local music",
-	"homepage": "https://github.com/xasopheno/Marriott/DCMLC",
+	"homepage": "https://github.com/xasopheno/Marriott",
 	"dependencies": {
 		"async": "1.5.0",
 		"body-parser": "1.14.1",
