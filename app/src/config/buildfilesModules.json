@@ -349,6 +349,20 @@
 									"layout.spec.js"
 								]
 							}
+						},
+						{
+							"name": "my-directive",
+							"files": {
+								"js": [
+									"my-directive.js"
+								],
+								"testUnit": [
+									"my-directive.spec.js"
+								],
+								"less": [
+									"my-directive.less"
+								]
+							}
 						}
 					]
 				},
@@ -560,6 +574,9 @@
 										],
 										"html": [
 											"test.html"
+										],
+										"less": [
+											"test.less.html"
 										],
 										"testUnit": [
 											"TestCtrl.spec.js"

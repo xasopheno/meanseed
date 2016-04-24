@@ -12,7 +12,7 @@
 	},
 	"app": {
 		"name": "Marriott",
-		"title": "Ren Project"
+		"title": "DJMLC"
 	},
 	"platform":"",
 	"server": {
@@ -41,7 +41,7 @@
 		"fullURI": "",
 		"host": "localhost",
 		"port": 27017,
-		"database": "Marriott",
+		"database": "meanseed",
 		"username": false,
 		"password": false
 	},

@@ -7,7 +7,7 @@ Returns a mongoose database connection. Configuration options should be passed i
 var opts = {
     host: 'localhost',
     port: 27017,
-    database: 'project'
+    database: 'meanseed'
 };
 
 var db = require('./database')(opts);
