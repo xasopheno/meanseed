@@ -28,57 +28,44 @@
         font-family: arial;
         font-size: 12px;
     }
-
     input, textarea {
         border: none;
         padding: 3px;
         border: solid 1px #CCC;
     }
-
     textarea {
         width: 700px;
         height: 200px;
     }
-
-
     ul {
         margin: 0px;
         padding: 0px;
         margin-left: 15px;
         color:#F28D00;
     }
-
-
     h1,h2,h3,h4,h5 {
         margin: 0px; padding: 0px;
     }
-
-
     h3 {
         color: #333;
         font-size: 12px;
-
         border-top: dashed 1px #bbb;
         padding-top: 20px;
         margin-bottom: 3px;
         margin-top: 15px;
-
         text-transform: uppercase;
     }
-
     h4 {
         padding-top: 10px;
         font-size: 12px;
         color:#666;
     }
-
     h1 {
         font-size: 34px;
         color:#F28D00;
         m_argin-bottom: 7px;
         text-shadow: 1px 1px #333;
     }
-
     table {
         width: 100%;
         margin: 0px;
@@ -87,24 +74,20 @@
         border-spacing: 0;
         border-radius:5px;
     }
-
     tr {
         margin: 0px;
         padding: 0px;
     }
-
     td {
         padding: 3px;
         border-bottom:solid 1px #CCC;
         margin: 0px;
     }
-
     .tryBt {
         cursor: pointer;
         width:100%;
         margin-top:10px;
     }
-
     .method {
         background-color: #1d1d1d;
         border-radius: 5px;
@@ -113,13 +96,11 @@
         border-top: solid 1px #242424;
         border-bottom: solid 1px #131313;
     }
-
     .method a {
         color: white;
         font-size: 14px;
         text-decoration: none;
     }
-
     .detail {
         display: none;
         margin: 10px;
@@ -128,7 +109,6 @@
         padding: 10px;
         border-radius: 5px;
     }
-
     .box {
         font-family: monospace;
         background-color: #F2F2F2;
@@ -139,7 +119,6 @@
         padding: 8px;
         border-radius:5px;
     }
-
     .box2 {
         white-space: pre;
         font-family: monospace;
@@ -148,7 +127,6 @@
         padding: 8px;
         border-radius:5px;
     }
-
     .info {
         margin-bottom: 20px;
         margin-top: 13px;
@@ -159,7 +137,6 @@
         padding-bottom: 2px;
         border-radius: 3px;
     }
-
     .logo {
         width: 120px;
         height: 120px;
@@ -173,16 +150,13 @@
         margin-bottom: 25px;
         margin-top: 15px;
     }
-
     a,a:visited, a:active, a:link {
         color: #666;
         text-decoration: none;
     }
-
     a:hover {
         color: #F28D00;
     }
-
     .testDetails {
         m_argin-top:20px;
         padding: 20px;
@@ -194,7 +168,6 @@
         -webkit-box-shadow: 0 0 20px #ccc;
         -moz-box-shadow: 0 0 20px #ccc;
     }
-
     #navigation {
         position: fixed;
         top: 0; left: 0; bottom: 0;
@@ -210,83 +183,61 @@
         background-color: #F2F2F2;
         color: #333;
     }
-
-
     #main {
         position: relative;
         margin-left:220px;
     }
-
     .string {
         color:#e4d87b;
     }
-
     .key {
         color:#b2da3e;
     }
-
     .boolean {
         color:#20B200;
     }
-
     .number {
         color:red;
     }
-
     td.param,
     input.param {
         width: 300px;
     }
-
     .required-param {
         color: #da4f49;
     }
-
     .test-help ul {
         color: #333;
     }
-
     </style>
 
     <script>
-
     var socketIO, schema, rpc;
-
     $(function(){
-
         rpc = rpcClient();
-
         // Are we under socket.io ?
         if (typeof(io) != "undefined"){
             socketIO = io.connect('/');
         } else {
             socketIO = false;
         }
-
         // Get api schema and build the UI
         rpc.input('getApiSchema',{},function(data){
             schema = data.result;
             console.log(schema);
-
             $(".testee").setTemplate($('#tplFiltragem').html());
             $(".testee").processTemplate({'data': data.result.methods});
-
             $("#menu").setTemplate($('#tplMenu').html());
             $("#menu").processTemplate({'data': data.result});
-
             $(".returnBody").each(function(){
                 var $returnBody = $(this);
                 $returnBody.html(syntaxHighlight( $returnBody.html() ));
             });
         })
-
-
         // Capture and process form tests
         $(document).on('submit', '.formMethod', function(){
-
             var method = $(this).attr('action'),
                 params = {};
-
             for (i in schema.methods[method].params){
                 params[i] = $("#"+i,this).val();
                 try {
@@ -295,11 +246,8 @@
                 } catch(err){
                 }
             }
-
             var obj = this;
-
             $('.tryBt',obj).val('Loading...');
-
             var startTime = +(new Date);
             rpc.input(method, params, function(response, request){
                 var endTime =  (+(new Date)) - startTime;
@@ -309,12 +257,9 @@
                 $('.testCurl',obj).html( rpc.curlify(method, schema.methods[method].params, params) );
                 $('.testArea',obj).fadeIn(600);
             });
-
             return false;
         })
     });
-
-
     // stackoverflow.com/questions/4810841/json-pretty-print-using-javascript
     function syntaxHighlight(json){
         json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -357,25 +302,26 @@
             <br/>
             <div><strong>NOTE:</strong> JSON strings are parsed using JSON.parse().</div>
             <div><strong>NOTE:</strong> Required values will not accept integer '0' as a value (strings will work though).. so have to make that parameter NOT required to allow '0' integer values</div>
-			
-			<!-- links to all help pages / endpoints -->
-			<!-- @todo - automate generation of these links -->
-			<br />
-			<h2>Api's</h2>
-			<ul>
-				<li><a href='/api/auth/help'>Auth</a></li>
-				<li><a href='/api/user/help'>User</a></li>
-				<li><a href='/api/follow/help'>Follow</a></li>
-				<li><a href='/api/twitter/help'>Twitter</a></li>
-				<li><a href='/api/facebook/help'>Facebook</a></li>
-				<li><a href='/api/google/help'>Google</a></li>
-				<li><a href='/api/dbUpdate/help'>DbUpdate</a></li>
-				<li><a href='/api/e2eMocks/help'>E2eMocks</a></li>
-				<!-- site-specific - add other help page links here -->
-				<!-- yeoman generated LINK here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE! -->
-				<!-- end: yeoman generated LINK here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE! -->
-			</ul>
-			
+            
+            <!-- links to all help pages / endpoints -->
+            <!-- @todo - automate generation of these links -->
+            <br />
+            <h2>Api's</h2>
+            <ul>
+                <li><a href='/api/auth/help'>Auth</a></li>
+                <li><a href='/api/user/help'>User</a></li>
+                <li><a href='/api/follow/help'>Follow</a></li>
+                <li><a href='/api/twitter/help'>Twitter</a></li>
+                <li><a href='/api/facebook/help'>Facebook</a></li>
+                <li><a href='/api/google/help'>Google</a></li>
+                <li><a href='/api/dbUpdate/help'>DbUpdate</a></li>
+                <li><a href='/api/e2eMocks/help'>E2eMocks</a></li>
+                <!-- site-specific - add other help page links here -->
+                <!-- yeoman generated LINK here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE! -->
+                <li><a href='/api/product/help'>Product</a></li>
+<!-- end: yeoman generated LINK here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE! -->
+            </ul>
+            
         </div>
     </div>
     <div class="testee"></div>
@@ -466,44 +412,40 @@
 // RPC.js browser helper
 var rpcClient = function(){
     var rpc = {};
-	
-	//get URL GET params (i.e. for authority keys)
-	var urlParams ={};
-	var locString =window.location.toString();
-	if(locString.indexOf('?') >-1) {
-		var urlString =locString.slice(locString.indexOf('?')+1, locString.length);
-		//strip # tag, if there
-		if(urlString.indexOf('#') >-1) {
-			urlString =urlString.slice(0, urlString.indexOf('#'));
-		}
-		var urlParamsTemp =urlString.split('&');
-		for(var ii=0; ii<urlParamsTemp.length; ii++) {
-			var temp =urlParamsTemp[ii].split('=');
-			urlParams[temp[0]] =temp[1];
-		}
-	}
-
+    
+    //get URL GET params (i.e. for authority keys)
+    var urlParams ={};
+    var locString =window.location.toString();
+    if(locString.indexOf('?') >-1) {
+        var urlString =locString.slice(locString.indexOf('?')+1, locString.length);
+        //strip # tag, if there
+        if(urlString.indexOf('#') >-1) {
+            urlString =urlString.slice(0, urlString.indexOf('#'));
+        }
+        var urlParamsTemp =urlString.split('&');
+        for(var ii=0; ii<urlParamsTemp.length; ii++) {
+            var temp =urlParamsTemp[ii].split('=');
+            urlParams[temp[0]] =temp[1];
+        }
+    }
     rpc.input = function (method, params, cb){
-		//add authority keys, if have them
-		if(urlParams.user_id && urlParams.sess_id) {
-			params.authority_keys ={
-				user_id: urlParams.user_id,
-				sess_id: urlParams.sess_id
-			};
-		}
-		//end: add authority keys
-		
+        //add authority keys, if have them
+        if(urlParams.user_id && urlParams.sess_id) {
+            params.authority_keys ={
+                user_id: urlParams.user_id,
+                sess_id: urlParams.sess_id
+            };
+        }
+        //end: add authority keys
+        
         var request = { method: method, params: params };
-
         if (socketIO != false)
         {
             // Socket.io
             socketIO.emit('rpc', request, function (data){
                 cb(data, { status: '200', statusText: 'socket.io', original: request} );
             });
-
         } else {
-
             // Ajax POST
             $.ajax({
                 url: gateway,
@@ -514,41 +456,29 @@ var rpcClient = function(){
                     cb( JSON.parse(jqXHR.responseText), { status: jqXHR.status, statusText:jqXHR.statusText, original: request} );
                 }
             });
-
         }
     };
-
     // Create CURL command for the method+params+input
     rpc.curlify = function(method, params, input){
         input = input || {};
         var result = { method: method, params: {} };
-
         for (i in params)
             result.params[i] = input[i] || '';
-
         return "curl -i -X POST -d rpc='"+JSON.stringify(result)+"' "+gateway;
     };
-
     rpc.findGateway = function(){
         var url = window.location.href.split('/');
-
         // convert URLs like /api/help and /api/help/ to /api/
         if(!url[url.length-1]){
             url.pop();
         }
-
         url[url.length-1] = '';
         url = url.join('/');
-
         return url;
     };
-
     var gateway = rpc.findGateway();
-
     return rpc;
 };
-
-
 </script>
 
 </body>

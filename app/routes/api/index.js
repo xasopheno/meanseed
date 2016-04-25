@@ -1,17 +1,11 @@
 /**
 NOTE: search for 'site-specific' in this file to see the places where you'll need to include site specific stuff (i.e. including new controllers).
-
 This requires all the api modules and passes in the database variable to them to be used in backend modules. It also sets up the endpoints for the apis. Basically this is the MAIN ROUTER (for the RPC api).
-
 Exposes and configures API endpoint(s). Is responsible for implementing site-wide authentication. API is configured as a JSON-RPC API conforming to the v2.0 protocol (see JSON-RPC section for implementation details and RPC-compliant module requirements).
-
 Returns an express middleware app. Requires a mongo database connection to be passed in.
-
 For all mounted RPC API endpoints, an interactive help page will be accessible at `/<base>/<endpoint>/help`.
-
 API Module
 @module api
-
 @toc
 1. Initialize the api route modules
 2. Set up the endpoints
@@ -43,6 +37,7 @@ var DbUpdateApi =require(pathPart+'dbUpdate/dbUpdate.api.js');
 var E2eMocksApi =require(pathPart+'e2eMocks/e2eMocks.api.js');
 //site-specific - require other api files here
 //yeoman generated REQUIRE here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
+var ProductApi =require(pathPart+'product/product.api.js');
 //end: yeoman generated REQUIRE here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 
 
@@ -86,7 +81,10 @@ module.exports = function(cfg, server, db){
 	});
 	//site-specific - load other api's here
 	//yeoman generated INIT API MODULES here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
-	//end: yeoman generated INIT API MODULES here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
+	var productApi = new ProductApi({
+	db: db
+});
+//end: yeoman generated INIT API MODULES here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 
 	
 	// set up auth middleware
@@ -156,7 +154,13 @@ module.exports = function(cfg, server, db){
 		},
 		//site-specific - setup other controllers/api's here
 		//yeoman generated ENDPOINTS here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
-		//end: yeoman generated ENDPOINTS here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
+		product: {
+	modules: {
+		product: productApi
+	},
+	middleware: []
+},
+//end: yeoman generated ENDPOINTS here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 	};
 
 	
