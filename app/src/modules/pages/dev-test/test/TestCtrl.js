@@ -2,24 +2,30 @@
 
 angular.module('myApp').controller('TestCtrl', ['$scope', '$timeout', 'appHttp', 'UserModel', '$location', function($scope, $timeout, appHttp, UserModel, $location) {
 	
+	$scope.log=[];
+	function logit(text, params) {
+		console.log('logit: '+text);
+		$scope.log.push(text);
+	}
+
 	$scope.scopeOne = 'scope one';
 
 	$scope.$on('appMyDirectiveEvt1', function(evt, params) {
-		console.log("controller directive evt");
+		logit("controller directive evt");
 	});
 
 	$scope.funcOne = function() {
-		console.log('funcOne controller');
+		logit('funcOne called1');
 	};
 
 	$scope.myVar ='var1';
 	$scope.user =UserModel.load();
 	
 	$scope.swipeIt =function(evt, direction, params) {
-		console.log('swipe: '+direction);
+		logit('swipe: '+direction);
 	};
 	
 	$scope.tapIt =function(evt, params) {
-		console.log('tap');
+		logit('tap');
 	};
 }]);

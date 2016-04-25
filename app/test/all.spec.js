@@ -38,6 +38,7 @@ var E2eMocksTests =require(pathParts.modules+'/controllers/e2eMocks/e2eMocks.tes
 //site-specific
 //yeoman generated REQUIRE here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 var ProductTests =require(pathParts.modules+'/controllers/product/product.test.js');
+var ProductTests =require(pathParts.modules+'/controllers/product/product.test.js');
 //end: yeoman generated REQUIRE here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 
 //run the server in the TEST environment (this also is required for coverage to work / run on all the files)		//UPDATE: now running this with grunt instead		//UPDATE 2: running with grunt breaks coverage (i.e. it does not run on all files) - apparently MUST run this file here for coverage to work properly..
@@ -146,6 +147,7 @@ describe('all tests', function() {
 			//site-specific
 			//yeoman generated INIT MODULES here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 			ProductTests = new ProductTests({db: db, api:api});
+ProductTests = new ProductTests({db: db, api:api});
 //end: yeoman generated INIT MODULES here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 		};
 
@@ -178,6 +180,7 @@ describe('all tests', function() {
 					//site-specific
 					//yeoman generated RUN TESTS here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 					.then(ProductTests.run({}))
+.then(ProductTests.run({}))
 //end: yeoman generated RUN TESTS here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 					.then(function(retFin) {
 						console.log('all tests done!');

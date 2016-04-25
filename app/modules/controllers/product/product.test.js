@@ -1,6 +1,8 @@
 /**
 Tests for all /api/product endpoints
+
 NOTE: "it" blocks with modularized/nested function and async code can be finicky - I don't think nested "it" blocks are allowed BUT need an outer "it" block to ensure the async code gets run (otherwise it will just complete immediately before running any tests). So if and when to use "done" for the it blocks and where to put them is sometimes hard to follow/trace. When in doubt, try an "it" block and if it errors or doesn't complete, try just putting an "expect" there directly - it's likely already in an "it" block..
+
 @toc
 public methods
 1. Product
@@ -16,7 +18,6 @@ private methods
 	7. read
 	8. search
 	9. delete1
-	10. saveTitle
 */
 
 'use strict';
@@ -335,28 +336,9 @@ function go(params) {
 					var data =res.data.result;
 					expect(data.results.length).toBe(1);		//TODO
 					
-					saveTitle({});		//go to next function/test in sequence
+					delete1({});		//go to next function/test in sequence
 				});
 			});
-		});
-	};
-
-	/**
-	@toc 10.
-	@method saveTitle
-	@param {Object} opts
-	*/
-	var saveTitle =function(opts) {
-		var newTitle ='saveTitle new product title';
-		var params ={
-			_id: TEST_PRODUCT[0]._id,
-			title: newTitle
-		};
-		api.expectRequest({method:'Product.saveTitle'}, {data:params}, {}, {})
-		.then(function(res) {
-			var data =res.data.result;
-			expect(data.product.title).toBe(newTitle);		
-			delete1({});		//go to next function/test in sequence
 		});
 	};
 	

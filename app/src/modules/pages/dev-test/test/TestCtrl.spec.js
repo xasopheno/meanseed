@@ -10,6 +10,12 @@ describe('TestCtrl', function(){
 		$ctrl = _$controller_('TestCtrl', {$scope: $scope});
 	}));
 	
-	it('should be called', function() {
+	it('it should have a funcOne function', function() {
+		$scope.funcOne();
+		expect($scope.log[($scope.log.length-1)]).toBe('funcOne called')
 	});
+
+	it('should have no user if not saved', function() {
+		expect($scope.user._id).toBe(false);
+	})
 });

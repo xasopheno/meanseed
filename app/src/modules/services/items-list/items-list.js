@@ -20,10 +20,35 @@ angular.module('app').factory('appItemsList', [ function() {
 	//public methods & properties that will be returned
 	var publicObj ={
 		//TODO, i.e.
-		test: function(input) {
-			return 'factory input: '+input;
-		}
-		
+		save: function(items, params) {
+			this.items=items;
+		},
+
+		load: function(params) {
+			if(!this.items || this.items.length <1) {
+				this.items =[
+					{
+						title: 'title 1'
+					},
+					{
+						title: 'title 2'
+					},
+					{
+						title: 'title 3'
+					},
+					{
+						title: 'title 4'
+					},
+					{
+						title: 'title 5'
+					}
+
+				];
+			}
+			return this.items;
+		},
+		items: [],
+
 		/*
 		myPublicProperty: 'some value',
 		

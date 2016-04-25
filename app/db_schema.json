@@ -61,4 +61,7 @@
 		"_id":"{ObjectId} ObjectId('123l4k234l')",
 		"title": "{String} product 1"
 	}
+	,"product":
+	{
+	}
 }
